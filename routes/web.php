@@ -8,7 +8,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\StrategicController;
 use App\Http\Controllers\FacilitatorController;
-use App\Http\Controllers\MarketingController;
+
 
 // use App\Http\Controllers\MilestoneForecastController;
 
@@ -33,7 +33,10 @@ Route::get('/home', function () {
 // Admin Page
 Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 // Player Page
-Route::get('/player', [PlayerController::class, 'index'])->name('player');
+
+Route::get('/player', [PlayerController::class, 'index'])->name('player.index');
+Route::post('/player/{teamId}/credits', [PlayerController::class, 'storeCredits'])->name('player.storeCredits');
+
 // Facilitator Strategist Page
 Route::get('/facilitator-strategist', [FacilitatorController::class, 'strategist'])->name('facilitator.strategist');
 // Facilitator Marketing Page
@@ -43,9 +46,6 @@ Route::get('/strategic', [StrategicController::class, 'index'])->name('strategic
 Route::post('/strategic/hire', [StrategicController::class, 'hireEmployee'])->name('strategic.hire');
 Route::post('/strategic/train', [StrategicController::class, 'trainEmployee'])->name('strategic.train');
 
-Route::get('/marketing', [MarketingController::class, 'index'])->name('marketing.index');
-Route::post('/marketing/upgrade', [MarketingController::class, 'upgradeFacility'])->name('marketing.upgrade');
-Route::post('/marketing/reach', [MarketingController::class, 'reachCustomer'])->name('marketing.reach');
 // // Milestone & Forecast Page
 // Route::get('/milestone', [MilestoneForecastController::class, 'index'])->name('milestone');
 

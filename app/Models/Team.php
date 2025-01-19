@@ -9,10 +9,17 @@ class Team extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'icon'];
 
+    // Relasi ke tabel employees (sudah ada sebelumnya)
     public function employees()
     {
         return $this->hasMany(Employee::class);
+    }
+
+    // Relasi ke tabel credits
+    public function credits()
+    {
+        return $this->hasMany(Credit::class);
     }
 }
