@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('teams', function (Blueprint $table) {
-            $table->string('icon')->nullable()->after('name'); // Tambahkan kolom icon
+            $table->string('icon')->nullable()->after('name'); // Menambahkan kolom icon
+            $table->integer('round')->default(0)->after('icon'); // Menambahkan kolom round
         });
     }
 
@@ -23,6 +24,7 @@ return new class extends Migration
     {
         Schema::table('teams', function (Blueprint $table) {
             $table->dropColumn('icon');
+            $table->dropColumn('round');
         });
     }
 };

@@ -3,84 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Player Page</title>
+    <title>Player Home Page</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #222;
+            color: #fff;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
             background-color: #fff;
             color: #000;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .team-container {
-            margin-bottom: 30px;
-            padding: 20px;
-            background-color: #f4f4f4;
             border-radius: 8px;
-            width: 100%;
-            max-width: 800px;
+            padding: 20px 30px;
+            width: 900px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        .form-group {
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            margin: 0;
+        }
+
+        .header h2 {
+            font-size: 1.2rem;
+            margin: 0;
+        }
+
+        .form-container {
+            background-color: #f4f4f4;
+            padding: 30px;
+            border-radius: 8px;
+        }
+
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .form-row .column {
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        .form-row .column:last-child {
+            margin-right: 0;
+        }
+
+        .form-container h3 {
+            margin-top: 0;
+            font-size: 1.5rem;
             margin-bottom: 15px;
         }
 
-        .form-group label {
+        .form-container label {
             display: block;
+            font-weight: bold;
             margin-bottom: 5px;
         }
 
-        .form-group input,
-        .form-group select {
+        .form-container input {
             width: 100%;
-            padding: 8px;
+            padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
+            margin-bottom: 15px;
+            font-size: 1rem;
         }
 
-        .btn {
-            background-color: #000;
-            color: #fff;
-            padding: 10px 20px;
+        .submit-btn {
+            display: block;
+            width: 150px;
+            margin: 20px auto 0;
+            padding: 10px 15px;
+            background-color: #ccc;
+            color: #000;
             border: none;
             border-radius: 4px;
+            font-weight: bold;
             cursor: pointer;
+            text-align: center;
         }
 
-        .btn:hover {
-            background-color: #333;
+        .submit-btn:hover {
+            background-color: #aaa;
         }
     </style>
 </head>
 <body>
-    <h1>Player Page</h1>
+    <div class="container">
+        <div class="header">
+            <h1>LOGO GAME</h1>
+            <h2>Round - 1</h2>
+        </div>
 
-    @foreach ($teams as $team)
-        <div class="team-container">
-            <h3>{{ $team->name }}</h3>
-            <form action="{{ route('player.storeCredits', $team->id) }}" method="POST">
-                @csrf
-                <div class="form-group">
-                    <label for="type">Credit Type</label>
-                    <select name="credits[0][type]" required>
-                        <option value="Kredit Konsumtif">Kredit Konsumtif</option>
-                        <option value="Kredit Produktif">Kredit Produktif</option>
-                        <option value="Giro">Giro</option>
-                        <option value="Pinjaman KP">Pinjaman KP</option>
-                        <option value="Asuransi">Asuransi</option>
-                        <option value="Kartu Kredit">Kartu Kredit</option>
-                    </select>
+        <div class="form-container">
+            <form action="#" method="POST">
+                <!-- Kredit Section -->
+                <div>
+                    <h3>Kredit</h3>
+                    <div class="form-row">
+                        <div class="column">
+                            <label for="kredit-konsumtif">• Kredit Konsumtif</label>
+                            <input type="number" id="kredit-konsumtif" name="kredit_konsumtif" placeholder="Enter Number">
+
+                            <label for="kartu-kredit">• Kartu Kredit</label>
+                            <input type="number" id="kartu-kredit" name="kartu_kredit" placeholder="Enter Number">
+                        </div>
+                        <div class="column">
+                            <label for="kredit-produktif">• Kredit Produktif</label>
+                            <input type="number" id="kredit-produktif" name="kredit_produktif" placeholder="Enter Number">
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="amount">Amount</label>
-                    <input type="number" name="credits[0][amount]" required>
+
+                <!-- Asuransi and Pinjaman KP Section -->
+                <div class="form-row">
+                    <div class="column">
+                        <h3>Asuransi</h3>
+                        <input type="number" id="asuransi" name="asuransi" placeholder="Enter Number">
+                    </div>
+                    <div class="column">
+                        <h3>Pinjaman KP</h3>
+                        <input type="number" id="pinjaman-kp" name="pinjaman_kp" placeholder="Enter Number">
+                    </div>
                 </div>
-                <button type="submit" class="btn">Submit</button>
+
+                <!-- Submit Button -->
+                <button type="submit" class="submit-btn">Submit</button>
             </form>
         </div>
-    @endforeach
+    </div>
 </body>
 </html>

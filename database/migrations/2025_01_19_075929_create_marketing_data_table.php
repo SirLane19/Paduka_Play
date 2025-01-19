@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('credits', function (Blueprint $table) {
+        Schema::create('marketing_data', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('team_id');
-            $table->string('type');
-            $table->integer('amount');
+            $table->unsignedBigInteger('team_id'); // Relasi ke tabel teams
+            $table->string('facility_name');
+            $table->integer('cost');
             $table->timestamps();
-        
+    
             $table->foreign('team_id')->references('id')->on('teams')->onDelete('cascade');
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('credits');
+        Schema::dropIfExists('marketing_data');
     }
 };

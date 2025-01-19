@@ -3,33 +3,35 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Team;
-use App\Models\Credit;
+use App\Models\Credit; // Model untuk kredit
+use App\Models\Team; // Model untuk tim
 
 class PlayerController extends Controller
 {
     public function index()
     {
-        $teams = Team::with('credits')->get(); // Ambil semua tim beserta data kreditnya
-        return view('player.index', compact('teams')); // Panggil view player/index.blade.php
+        return view('player.index');
     }
 
-    public function storeCredits(Request $request, $teamId)
+    public function store(Request $request)
     {
         $request->validate([
-            'credits' => 'required|array',
-            'credits.*.type' => 'required|string',
-            'credits.*.amount' => 'required|integer|min:0',
+            'kredit_konsumtif' => 'required|integer|min:0',
+            'kredit_produktif' => 'required|integer|min:0',
+            'kartu_kredit' => 'required|integer|min:0',
+            'asuransi' => 'required|integer|min:0',
+            'pinjaman_kp' => 'required|integer|min:0',
         ]);
 
-        foreach ($request->credits as $credit) {
-            Credit::create([
-                'team_id' => $teamId,
-                'type' => $credit['type'],
-                'amount' => $credit['amount']
-            ]);
-        }
+        // Simpan data ke database
+        Credit::create([
+            'team_id' => 1, // Ganti dengan ID tim yang sesuai
+            'type' => 'Kredit Konsumtif',
+            'amount' => $request->kredit_konsumtif,
+        ]);
 
-        return redirect()->route('player.index')->with('success', 'Credits added successfully!');
+        // Tambahkan penyimpanan untuk field lain
+
+        return redirect()->route('player.index')->with('success', 'Data saved successfully!');
     }
 }
