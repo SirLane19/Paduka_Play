@@ -9,6 +9,7 @@ use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\StrategicController;
 use App\Http\Controllers\FacilitatorController;
 use App\Http\Controllers\MarketingController;
+use App\Http\Controllers\WaitingController;
 
 
 // use App\Http\Controllers\MilestoneForecastController;
@@ -51,6 +52,11 @@ Route::post('/strategic/train', [StrategicController::class, 'trainEmployee'])->
 
 Route::get('/marketing', [MarketingController::class, 'index'])->name('marketing.index');
 Route::post('/marketing/{teamId}', [MarketingController::class, 'store'])->name('marketing.store');
+
+Route::get('/waiting', function () {
+    return view('waiting');
+})->name('waiting');
+
 
 
 // // Milestone & Forecast Page
