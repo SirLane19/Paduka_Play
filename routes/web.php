@@ -64,7 +64,6 @@ Route::get('/waiting', function () {
 })->name('waiting');
 
 
-
 // // Milestone & Forecast Page
 // Route::get('/milestone', [MilestoneForecastController::class, 'index'])->name('milestone');
 
