@@ -14,6 +14,10 @@ use App\Http\Controllers\WaitingController;
 
 // use App\Http\Controllers\MilestoneForecastController;
 
+Route::get('/', function() {
+    return redirect('/home');
+});
+
 // Login Page
 Route::get('/login', [CodeRoomController::class, 'index'])->name('login');
 Route::post('/login', [CodeRoomController::class, 'login'])->name('login.process');
@@ -29,7 +33,9 @@ Route::post('/page2/end-game', [MainPageController::class, 'endGame'])->name('ga
 
 // Homepage
 Route::get('/home', function () {
-    return view('home_page');
+    // return view('home_page');
+    // by: Jose
+    return view('homepage');
 })->name('home');
 
 // Admin Page
