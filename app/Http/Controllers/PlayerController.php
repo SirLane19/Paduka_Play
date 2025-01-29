@@ -3,35 +3,35 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Credit; // Model untuk kredit
-use App\Models\Team; // Model untuk tim
+use App\Models\Player;
 
 class PlayerController extends Controller
 {
-    public function index()
+    // Menampilkan form pemilihan tim
+    public function create()
     {
-        return view('player.index');
+        return view('player.create');
     }
 
+    // Menyimpan data pemain yang dipilih
     public function store(Request $request)
     {
         $request->validate([
-            'kredit_konsumtif' => 'required|integer|min:0',
-            'kredit_produktif' => 'required|integer|min:0',
-            'kartu_kredit' => 'required|integer|min:0',
-            'asuransi' => 'required|integer|min:0',
-            'pinjaman_kp' => 'required|integer|min:0',
+            'name' => 'required|string|max:255',
+            'icon' => 'required|string',
         ]);
 
-        // Simpan data ke database
-        Credit::create([
-            'team_id' => 1, // Ganti dengan ID tim yang sesuai
-            'type' => 'Kredit Konsumtif',
-            'amount' => $request->kredit_konsumtif,
+        Player::create([
+            'name' => $request->name,
+            'icon' => $request->icon,
         ]);
 
-        // Tambahkan penyimpanan untuk field lain
+        return redirect()->route('player.success');
+    }
 
-        return redirect()->route('player.index')->with('success', 'Data saved successfully!');
+    // Menampilkan halaman sukses (opsional)
+    public function success()
+    {
+        return view('player.success');
     }
 }

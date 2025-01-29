@@ -8,7 +8,7 @@ class CodeRoomController extends Controller
 {
     public function index()
     {
-        return view('code_room_login');
+        return view('code_room');
     }
 
     public function login(Request $request)

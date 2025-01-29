@@ -5,16 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Strategic;
 
-class StrategicController extends Controller
+class StrategicHireTrainController extends Controller
 {
-    // Menampilkan form input strategi
+    // Menampilkan form input hire & train
     public function create()
     {
         $teams = ['Team - 1', 'Team - 2', 'Team - 3', 'Team - 4', 'Team - 5', 'Team - 6'];
-        return view('strategic.input', ['round' => 1, 'teams' => $teams, 'currentTeam' => $teams[0]]);
+        $trainers = ['Trainer A', 'Trainer B', 'Trainer C']; // Tambahan trainer untuk train_from
+        return view('strategic.hire_train', [
+            'round' => 1, 
+            'teams' => $teams, 
+            'trainers' => $trainers
+        ]);
     }
 
-    // Menyimpan data strategi
+    // Menyimpan data hire & train
     public function store(Request $request)
     {
         $request->validate([
@@ -35,12 +40,12 @@ class StrategicController extends Controller
             'train_from' => $request->train_from,
         ]);
 
-        return redirect()->route('strategic.success');
+        return redirect()->route('strategic.hire_train.success');
     }
 
     // Menampilkan halaman sukses (opsional)
     public function success()
     {
-        return view('strategic.success');
+        return view('strategic.hire_train_success');
     }
 }

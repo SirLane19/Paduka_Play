@@ -3,69 +3,71 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CodeRoomController;
 use App\Http\Controllers\InterestController;
-use App\Http\Controllers\MainPageController;
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PlayerController;
-use App\Http\Controllers\StrategicController;
-use App\Http\Controllers\FacilitatorController;
+use App\Http\Controllers\GameInputController;
 use App\Http\Controllers\MarketingController;
-use App\Http\Controllers\WaitingController;
+use App\Http\Controllers\StrategicController;
+use App\Http\Controllers\UpgradeController;
+use App\Http\Controllers\StrategicHireTrainController;
+use App\Http\Controllers\LeaderboardController;
 
-
-// use App\Http\Controllers\MilestoneForecastController;
-
+// Redirect default URL ke halaman home
 Route::get('/', function() {
-    return redirect('/home');
+    return redirect()->route('home');
 });
 
-// Login Page
-Route::get('/login', [CodeRoomController::class, 'index'])->name('login');
-Route::post('/login', [CodeRoomController::class, 'login'])->name('login.process');
+// Login Page (Code Room)
+Route::controller(CodeRoomController::class)->group(function () {
+    Route::get('/coderoom', 'index')->name('login');
+    Route::post('/login', 'login')->name('login.process');
+});
 
-// Add Interest Page
-Route::get('/page1', [InterestController::class, 'index'])->name('interest');
-Route::post('/page1/add', [InterestController::class, 'store'])->name('interest.add');
-
-// Main Page (Leaderboard, End Round, End Game)
-Route::get('/page2', [MainPageController::class, 'index'])->name('main.page');
-Route::post('/page2/end-round', [MainPageController::class, 'endRound'])->name('round.end');
-Route::post('/page2/end-game', [MainPageController::class, 'endGame'])->name('game.end');
-
-// Homepage
+// Home Page
 Route::get('/home', function () {
-    // return view('home_page');
-    // by: Jose
-    return view('homepage');
+    return view('homepage'); // Sesuaikan nama view jika perlu
 })->name('home');
 
-// Admin Page
-Route::get('/admin', [AdminController::class, 'index'])->name('admin');
-// Player Page
+// Interest Page (Menambahkan Bunga Kredit)
+Route::controller(InterestController::class)->group(function () {
+    Route::get('/page1', 'index')->name('interest');
+    Route::post('/page1/add', 'store')->name('interest.add');
+});
 
-Route::get('/player', [PlayerController::class, 'index'])->name('player.index');
-Route::post('/player/{teamId}/credits', [PlayerController::class, 'storeCredits'])->name('player.storeCredits');
-Route::post('/player/store', [PlayerController::class, 'store'])->name('player.store');
+// Game Input (Input Data dalam Game)
+Route::prefix('game')->name('game.')->group(function () {
+    Route::get('/input', [GameInputController::class, 'create'])->name('input');
+    Route::post('/store', [GameInputController::class, 'store'])->name('store');
+    Route::get('/success', [GameInputController::class, 'success'])->name('success');
+});
 
+// Player Page (Pemilihan Tim)
+Route::prefix('player')->name('player.')->group(function () {
+    Route::get('/create', [PlayerController::class, 'create'])->name('create');
+    Route::post('/store', [PlayerController::class, 'store'])->name('store');
+    Route::get('/success', [PlayerController::class, 'success'])->name('success');
+});
 
-// Facilitator Strategist Page
-Route::get('/facilitator-strategist', [FacilitatorController::class, 'strategist'])->name('facilitator.strategist');
-// Facilitator Marketing Page
-Route::get('/facilitator-marketing', [FacilitatorController::class, 'marketing'])->name('facilitator.marketing');
+Route::get('/marketing/input', [MarketingController::class, 'create'])->name('marketing.input');
+Route::post('/marketing/store', [MarketingController::class, 'store'])->name('marketing.store');
+Route::get('/marketing/success', [MarketingController::class, 'success'])->name('marketing.success');
 
-Route::get('/strategic', [StrategicController::class, 'index'])->name('strategic.index');
-Route::post('/strategic/hire', [StrategicController::class, 'hireEmployee'])->name('strategic.hire');
-Route::post('/strategic/train', [StrategicController::class, 'trainEmployee'])->name('strategic.train');
+Route::get('/upgrade/input', [UpgradeController::class, 'create'])->name('upgrade.input');
+Route::post('/upgrade/store', [UpgradeController::class, 'store'])->name('upgrade.store');
+Route::get('/upgrade/success', [UpgradeController::class, 'success'])->name('upgrade.success');
 
-Route::get('/marketing', [MarketingController::class, 'index'])->name('marketing.index');
-Route::post('/marketing/{teamId}', [MarketingController::class, 'store'])->name('marketing.store');
+Route::get('/strategic/input', [StrategicController::class, 'create'])->name('strategic.input');
+Route::post('/strategic/store', [StrategicController::class, 'store'])->name('strategic.store');
+Route::get('/strategic/success', [StrategicController::class, 'success'])->name('strategic.success');
 
+Route::get('/strategic/hire-train', [StrategicHireTrainController::class, 'create'])->name('strategic.hire_train.input');
+Route::post('/strategic/hire-train/store', [StrategicHireTrainController::class, 'store'])->name('strategic.hire_train.store');
+Route::get('/strategic/hire-train/success', [StrategicHireTrainController::class, 'success'])->name('strategic.hire_train.success');
+
+Route::get('/admin/leaderboard', [LeaderboardController::class, 'index'])->name('admin.leaderboard');
+Route::post('/admin/end-round', [LeaderboardController::class, 'endRound'])->name('admin.endRound');
+Route::post('/admin/end-game', [LeaderboardController::class, 'endGame'])->name('admin.endGame');
+
+// Waiting Page
 Route::get('/waiting', function () {
     return view('waiting');
 })->name('waiting');
-
-
-// // Milestone & Forecast Page
-// Route::get('/milestone', [MilestoneForecastController::class, 'index'])->name('milestone');
-
-// // End Score Page
-// Route::get('/end-score', [MainPageController::class, 'endScore'])->name('end.score');

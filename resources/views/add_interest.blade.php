@@ -1,100 +1,131 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Add Interest</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
+@extends('layouts.app')
 
-        .container {
-            background-color: #fff;
-            width: 400px;
-            border-radius: 8px;
-            padding: 30px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
+@section('title', 'Admin - Add Interest')
 
-        h1 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-        }
+@section('style')
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
 
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+    .container {
+        background-color: #fff;
+        max-width: 500px;
+        width: 90%;
+        border-radius: 8px;
+        padding: 25px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
 
-        .interest-group {
-            width: 100%;
-            margin-bottom: 20px;
-        }
+    h1 {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        color: black;
+    }
 
-        .interest-group label {
-            font-size: 1rem;
-            font-weight: bold;
-            display: block;
-            margin-bottom: 10px;
-            text-align: left;
-        }
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
 
-        .interest-group input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 1rem;
-            text-align: right;
-        }
+    .interest-group {
+        width: 100%;
+        margin-bottom: 15px;
+    }
 
-        .button {
-            padding: 10px 20px;
-            background-color: #000;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            font-size: 1rem;
-            cursor: pointer;
-        }
+    .interest-group label {
+        font-size: 1rem;
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+        text-align: left;
+    }
 
-        .button:hover {
-            background-color: #333;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Interest</h1>
-        <form action="/page1/add" method="POST">
-            @csrf
-            <div class="interest-group">
-                <label for="interest1">Bunga Kredit Produktif</label>
-                <input type="text" id="interest1" name="interest1" placeholder="%">
+    .input-wrapper {
+        display: flex;
+        align-items: center;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 5px 10px;
+        background: #fff;
+    }
+
+    .interest-group input {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        font-size: 1rem;
+        text-align: right;
+        outline: none;
+    }
+
+    .input-wrapper span {
+        font-size: 1rem;
+        margin-left: 5px;
+        color: #555;
+    }
+
+    .button {
+        width: 100%;
+        padding: 12px;
+        background: black;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    .button:hover {
+        background: #333;
+    }
+</style>
+@endsection
+
+@section('content')
+<div class="container">
+    <h1>Interest</h1>
+    <form action="/page1/add" method="POST">
+        @csrf
+        <div class="interest-group">
+            <label for="interest1">Bunga Kredit Produktif</label>
+            <div class="input-wrapper">
+                <input type="text" id="interest1" name="interest1" placeholder="Masukkan angka">
+                <span>%</span>
             </div>
-            <div class="interest-group">
-                <label for="interest2">Bunga Kredit Konsumtif</label>
-                <input type="text" id="interest2" name="interest2" placeholder="%">
+        </div>
+        <div class="interest-group">
+            <label for="interest2">Bunga Kredit Konsumtif</label>
+            <div class="input-wrapper">
+                <input type="text" id="interest2" name="interest2" placeholder="Masukkan angka">
+                <span>%</span>
             </div>
-            <div class="interest-group">
-                <label for="interest3">Bunga Dana Pihak Ketiga</label>
-                <input type="text" id="interest3" name="interest3" placeholder="%">
+        </div>
+        <div class="interest-group">
+            <label for="interest3">Bunga Dana Pihak Ketiga</label>
+            <div class="input-wrapper">
+                <input type="text" id="interest3" name="interest3" placeholder="Masukkan angka">
+                <span>%</span>
             </div>
-            <div class="interest-group">
-                <label for="interest4">Bunga Penempatan dan Peminjaman Kantor Pusat</label>
-                <input type="text" id="interest4" name="interest4" placeholder="%">
+        </div>
+        <div class="interest-group">
+            <label for="interest4">Bunga Penempatan dan Peminjaman Kantor Pusat</label>
+            <div class="input-wrapper">
+                <input type="text" id="interest4" name="interest4" placeholder="Masukkan angka">
+                <span>%</span>
             </div>
-            <button type="submit" class="button">Start Game</button>
-        </form>
-    </div>
-</body>
-</html>
+        </div>
+        <button type="submit" class="button">Start Game</button>
+    </form>
+</div>
+@endsection

@@ -3,32 +3,42 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Team;
-use App\Models\MarketingData;
+use App\Models\MarketingRound;
 
 class MarketingController extends Controller
 {
-    // Tampilkan halaman Marketing
-    public function index()
+    // Menampilkan form input marketing
+    public function create()
     {
-        $teams = Team::all(); // Ambil semua tim
-        return view('marketing.index', compact('teams'));
+        $teams = ['Team - 1', 'Team - 2', 'Team - 3', 'Team - 4', 'Team - 5', 'Team - 6'];
+        return view('marketing.input', ['round' => 1, 'teams' => $teams, 'currentTeam' => $teams[0]]);
     }
 
-    // Simpan data marketing
-    public function store(Request $request, $teamId)
+    // Menyimpan data marketing
+    public function store(Request $request)
     {
         $request->validate([
-            'facility_name' => 'required|string',
-            'cost' => 'required|integer|min:0',
+            'team' => 'required|string',
+            'round' => 'required|integer',
+            'upgrade_name' => 'required|string',
+            'upgrade_cost' => 'required|numeric',
+            'reach_customer' => 'required|string',
         ]);
 
-        MarketingData::create([
-            'team_id' => $teamId,
-            'facility_name' => $request->facility_name,
-            'cost' => $request->cost,
+        MarketingRound::create([
+            'team' => $request->team,
+            'round' => $request->round,
+            'upgrade_name' => $request->upgrade_name,
+            'upgrade_cost' => $request->upgrade_cost,
+            'reach_customer' => $request->reach_customer,
         ]);
 
-        return redirect()->route('marketing.index')->with('success', 'Facility upgraded successfully!');
+        return redirect()->route('marketing.success');
+    }
+
+    // Menampilkan halaman sukses (opsional)
+    public function success()
+    {
+        return view('marketing.success');
     }
 }
