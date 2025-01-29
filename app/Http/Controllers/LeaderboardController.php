@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Leaderboard;
+use Illuminate\Support\Facades\Cache;
 
 class LeaderboardController extends Controller
 {
@@ -13,7 +14,14 @@ class LeaderboardController extends Controller
         $round = 1; // Default round
         $leaderboard = Leaderboard::orderBy('rank', 'asc')->get();
 
-        return view('admin.leaderboard', compact('leaderboard', 'round'));
+        $token = Cache::get('token');
+        if (!$token) {
+            return redirect('/coderoom');
+        }
+
+        $players = Cache::get("game_session_{$token}_players", []);
+
+        return view('admin.leaderboard', compact('leaderboard', 'round', 'players'));
     }
 
     // Mengakhiri ronde

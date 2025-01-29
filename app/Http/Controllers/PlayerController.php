@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Player;
+use Illuminate\Support\Facades\Cache;
 
 class PlayerController extends Controller
 {
@@ -13,22 +14,22 @@ class PlayerController extends Controller
         return view('player.create');
     }
 
-    // Menyimpan data pemain yang dipilih
     public function store(Request $request)
     {
-        
-        // $request->validate([
-        //     'name' => 'required|string|max:255',
-        //     'icon' => 'required|string',
-        // ]);
+        // Simpan nama pemain dalam cache, karena cache global buat satu server dan gampang dimanipulasi
 
-        // To Database
-        // Player::create([
-        //     'name' => $request->name,
-        //     'icon' => $request->icon,
-        // ]);
+        $token = Cache::get('token');
+        $players = Cache::get("game_session_{$token}_players", []);
 
-        return redirect()->route('waiting');
+        $players[] = $request->input('name');
+        Cache::put("game_session_{$token}_players", $players, now()->addMinutes(60));
+
+        return redirect('/game/input');
+    }
+
+    public function play(Request $request)
+    {
+        return redirect('/waiting');
     }
 
     // Menampilkan halaman sukses (opsional)

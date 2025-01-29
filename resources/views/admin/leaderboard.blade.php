@@ -134,7 +134,6 @@
         <h1>LOGO GAME</h1>
         <span class="round-badge">Round - {{ $round }}</span>
     </div>
-
     <div class="leaderboard">
         <h2>Leaderboard</h2>
         <table class="table">
@@ -155,6 +154,16 @@
                 @endforeach
             </tbody>
         </table>
+    </div>
+
+
+    <div class="mt-5 text-left">
+        <p>Joined:</p>
+        <ul>
+            @foreach ($players as $player)
+                <li>{{$player}}</li>
+            @endforeach
+        </ul>
     </div>
 
     <div class="button-container">

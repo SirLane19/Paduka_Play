@@ -61,7 +61,7 @@
                     Player
                 </div>
             </a>
-            <a href="/" class="menu-box col d-flex flex-row">
+            <a href="{{route('strategic.input')}}" class="menu-box col d-flex flex-row">
                 <div class="box-1 text-center">
                     <i class="bi bi-pencil"></i>
                 </div>

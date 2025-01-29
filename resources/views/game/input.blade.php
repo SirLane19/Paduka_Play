@@ -115,42 +115,42 @@
 
     <h2>Input Data</h2>
 
-    <form action="{{ route('game.store') }}" method="POST">
+    <form action="{{ route('game.play') }}" method="POST">
         @csrf
         <input type="hidden" name="round" value="{{ $round }}">
 
         <div class="form-grid">
             <div class="form-group">
                 <label>Kredit Konsumtif</label>
-                <input type="number" name="kredit_konsumtif" placeholder="Enter Number" required>
+                <input type="number" name="kredit_konsumtif" placeholder="Enter Number">
             </div>
             <div class="form-group">
                 <label>Kredit Produktif</label>
-                <input type="number" name="kredit_produktif" placeholder="Enter Number" required>
+                <input type="number" name="kredit_produktif" placeholder="Enter Number">
             </div>
             <div class="form-group">
                 <label>Penempatan Pusat</label>
-                <input type="number" name="penempatan_pusat" placeholder="Enter Number" required>
+                <input type="number" name="penempatan_pusat" placeholder="Enter Number">
             </div>
             <div class="form-group">
                 <label>Giro</label>
-                <input type="number" name="giro" placeholder="Enter Number" required>
+                <input type="number" name="giro" placeholder="Enter Number">
             </div>
             <div class="form-group">
                 <label>Pinjaman Pusat</label>
-                <input type="number" name="pinjaman_pusat" placeholder="Enter Number" required>
+                <input type="number" name="pinjaman_pusat" placeholder="Enter Number">
             </div>
             <div class="form-group">
                 <label>Asuransi</label>
-                <input type="number" name="asuransi" placeholder="Enter Number" required>
+                <input type="number" name="asuransi" placeholder="Enter Number">
             </div>
             <div class="form-group">
                 <label>Kartu Kredit</label>
-                <input type="number" name="kartu_kredit" placeholder="Enter Number" required>
+                <input type="number" name="kartu_kredit" placeholder="Enter Number">
             </div>
             <div class="form-group">
                 <label>Bintang</label>
-                <input type="number" name="bintang" placeholder="Enter Number" required>
+                <input type="number" name="bintang" placeholder="Enter Number">
             </div>
         </div>
 

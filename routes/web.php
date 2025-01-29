@@ -11,20 +11,6 @@ use App\Http\Controllers\UpgradeController;
 use App\Http\Controllers\StrategicHireTrainController;
 use App\Http\Controllers\LeaderboardController;
 
-// DEBUG ONLY
-Route::get('/ceksesi', function () {
-    return view('session_checker');
-});
-Route::get('check-session', function () {
-    $token = session('game_token');
-    $playerName = session('player_name');
-
-    // Mengembalikan data session ke frontend
-    return response()->json([
-        'game_token' => $token,
-        'player_name' => $playerName
-    ]);
-});
 
 Route::get('/admin/create-game', [CodeRoomController::class, 'createGameToken'])->name('admin.create');
 Route::post('/admin/start-session/{token}', [CodeRoomController::class, 'startGame'])->name('admin.store');
@@ -57,6 +43,7 @@ Route::controller(InterestController::class)->group(function () {
 Route::prefix('game')->name('game.')->group(function () {
     Route::get('/input', [GameInputController::class, 'create'])->name('input');
     Route::post('/store', [GameInputController::class, 'store'])->name('store');
+    Route::post('/play', [PlayerController::class, 'play'])->name('play');
     Route::get('/success', [GameInputController::class, 'success'])->name('success');
 });
 

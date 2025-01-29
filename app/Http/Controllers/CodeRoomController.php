@@ -19,18 +19,9 @@ class CodeRoomController extends Controller
         // Saat game dimulai, di session bakal ada status "waiting"
         // dd($request->all());
         $token = $request->input('code');
-
+        Cache::put("token", $token, now()->addMinutes(60));
         Cache::put("game_session_{$token}_status", 'waiting', now()->addMinutes(60));
         return redirect()->route('admin.addinterest');
-    }
-
-    // Fungsi untuk menambahkan pemain ke dalam game
-    public function addPlayer(Request $request, $token)
-    {
-        // Simpan nama pemain dalam cache atau session
-        $playerName = $request->input('name');
-        // Cache::put("game_session_{$token}_player_{$playerName}", 'waiting', now()->addMinutes(60)); // Status pemain 'waiting'
-        return response()->json(['message' => 'Player added to the waiting list']);
     }
 
     // Fungsi untuk memulai game
@@ -50,7 +41,7 @@ class CodeRoomController extends Controller
     // Fungsi untuk melihat status game berdasarkan token
     public function getGameStatus(Request $request)
     {
-        $token = $request->token;
+        $token = Cache::get('token');
         $sessionStatus = Cache::get("game_session_{$token}_status", 'pending');
         return response()->json(['status' => $sessionStatus]);
     }
