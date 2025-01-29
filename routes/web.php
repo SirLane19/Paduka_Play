@@ -45,7 +45,7 @@ Route::prefix('player')->name('player.')->group(function () {
     Route::get('/create', [PlayerController::class, 'create'])->name('create');
     Route::post('/store', [PlayerController::class, 'store'])->name('store');
     Route::get('/success', [PlayerController::class, 'success'])->name('success');
-});
+    });
 
 Route::get('/marketing/input', [MarketingController::class, 'create'])->name('marketing.input');
 Route::post('/marketing/store', [MarketingController::class, 'store'])->name('marketing.store');
@@ -63,6 +63,8 @@ Route::get('/strategic/hire-train', [StrategicHireTrainController::class, 'creat
 Route::post('/strategic/hire-train/store', [StrategicHireTrainController::class, 'store'])->name('strategic.hire_train.store');
 Route::get('/strategic/hire-train/success', [StrategicHireTrainController::class, 'success'])->name('strategic.hire_train.success');
 
+Route::get('/admin/addinterest', [InterestController::class, 'index'])->name('admin.addinterest');
+Route::post('/admin/addinterest/add', [InterestController::class, 'store'])->name('admin.addinterest.add');
 Route::get('/admin/leaderboard', [LeaderboardController::class, 'index'])->name('admin.leaderboard');
 Route::post('/admin/end-round', [LeaderboardController::class, 'endRound'])->name('admin.endRound');
 Route::post('/admin/end-game', [LeaderboardController::class, 'endGame'])->name('admin.endGame');

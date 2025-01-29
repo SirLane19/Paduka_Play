@@ -21,7 +21,7 @@
         border-radius: 8px;
         padding: 25px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        text-align: center;
+        number-align: center;
     }
 
     h1 {
@@ -47,7 +47,7 @@
         font-weight: bold;
         display: block;
         margin-bottom: 5px;
-        text-align: left;
+        number-align: left;
     }
 
     .input-wrapper {
@@ -64,7 +64,7 @@
         padding: 10px;
         border: none;
         font-size: 1rem;
-        text-align: right;
+        number-align: right;
         outline: none;
     }
 
@@ -95,33 +95,33 @@
 @section('content')
 <div class="container">
     <h1>Interest</h1>
-    <form action="/page1/add" method="POST">
+    <form action="{{ route('admin.addinterest.add') }}" method="POST">
         @csrf
         <div class="interest-group">
             <label for="interest1">Bunga Kredit Produktif</label>
             <div class="input-wrapper">
-                <input type="text" id="interest1" name="interest1" placeholder="Masukkan angka">
+                <input type="number" id="interest1" name="interest1" placeholder="Masukkan angka">
                 <span>%</span>
             </div>
         </div>
         <div class="interest-group">
             <label for="interest2">Bunga Kredit Konsumtif</label>
             <div class="input-wrapper">
-                <input type="text" id="interest2" name="interest2" placeholder="Masukkan angka">
+                <input type="number" id="interest2" name="interest2" placeholder="Masukkan angka">
                 <span>%</span>
             </div>
         </div>
         <div class="interest-group">
             <label for="interest3">Bunga Dana Pihak Ketiga</label>
             <div class="input-wrapper">
-                <input type="text" id="interest3" name="interest3" placeholder="Masukkan angka">
+                <input type="number" id="interest3" name="interest3" placeholder="Masukkan angka">
                 <span>%</span>
             </div>
         </div>
         <div class="interest-group">
             <label for="interest4">Bunga Penempatan dan Peminjaman Kantor Pusat</label>
             <div class="input-wrapper">
-                <input type="text" id="interest4" name="interest4" placeholder="Masukkan angka">
+                <input type="number" id="interest4" name="interest4" placeholder="Masukkan angka">
                 <span>%</span>
             </div>
         </div>

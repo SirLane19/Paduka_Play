@@ -16,17 +16,19 @@ class PlayerController extends Controller
     // Menyimpan data pemain yang dipilih
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'icon' => 'required|string',
-        ]);
+        
+        // $request->validate([
+        //     'name' => 'required|string|max:255',
+        //     'icon' => 'required|string',
+        // ]);
 
-        Player::create([
-            'name' => $request->name,
-            'icon' => $request->icon,
-        ]);
+        // To Database
+        // Player::create([
+        //     'name' => $request->name,
+        //     'icon' => $request->icon,
+        // ]);
 
-        return redirect()->route('player.success');
+        return redirect()->route('waiting');
     }
 
     // Menampilkan halaman sukses (opsional)

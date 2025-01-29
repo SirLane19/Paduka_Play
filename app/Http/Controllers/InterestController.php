@@ -8,12 +8,12 @@ class InterestController extends Controller
 {
     public function index()
     {
-        return view('add_interest');
+        return view('admin.add_interest');
     }
 
     public function store(Request $request)
     {
-        // Logic untuk menyimpan interest
-        return redirect('/page2');
+        // dd($request->all());
+        return redirect()->route('admin.leaderboard');
     }
 }

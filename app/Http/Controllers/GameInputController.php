@@ -27,17 +27,18 @@ class GameInputController extends Controller
             'bintang' => 'required|numeric',
         ]);
 
-        GameInput::create([
-            'round' => $request->round,
-            'kredit_konsumtif' => $request->kredit_konsumtif,
-            'kredit_produktif' => $request->kredit_produktif,
-            'penempatan_pusat' => $request->penempatan_pusat,
-            'giro' => $request->giro,
-            'pinjaman_pusat' => $request->pinjaman_pusat,
-            'asuransi' => $request->asuransi,
-            'kartu_kredit' => $request->kartu_kredit,
-            'bintang' => $request->bintang,
-        ]);
+        // Ke Database >>>>
+        // GameInput::create([
+        //     'round' => $request->round,
+        //     'kredit_konsumtif' => $request->kredit_konsumtif,
+        //     'kredit_produktif' => $request->kredit_produktif,
+        //     'penempatan_pusat' => $request->penempatan_pusat,
+        //     'giro' => $request->giro,
+        //     'pinjaman_pusat' => $request->pinjaman_pusat,
+        //     'asuransi' => $request->asuransi,
+        //     'kartu_kredit' => $request->kartu_kredit,
+        //     'bintang' => $request->bintang,
+        // ]);
 
         return redirect()->route('game.success');
     }

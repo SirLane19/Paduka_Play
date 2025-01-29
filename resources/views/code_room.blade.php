@@ -72,11 +72,11 @@
 @section('content')
 <div class="container">
     <h1>Paduka Play</h1>
-    <p>Masukkan kode room untuk bergabung</p>
-    <form action="/login" method="POST">
+    <p>Masukkan kode room</p>
+    <form action="{{ route('login.process') }}" method="POST">
         @csrf
-        <input type="text" class="input" name="code" placeholder="Enter Code" required>
-        <button type="submit" class="button">Enter</button>
+        <input type="text" class="input" name="code" placeholder="Enter Code">
+        <button type="submit" class="button">Create Room</button>
     </form>
 </div>
 @endsection

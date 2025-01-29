@@ -69,7 +69,7 @@
                     Facilitator Srategist
                 </div>
             </a>
-            <a href="/" class="menu-box col d-flex flex-row">
+            <a href="{{ route('marketing.input') }}" class="menu-box col d-flex flex-row">
                 <div class="box-1 text-center">
                     <i class="bi bi-bank"></i>
                 </div>

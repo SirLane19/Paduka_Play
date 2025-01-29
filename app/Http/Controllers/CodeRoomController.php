@@ -13,7 +13,7 @@ class CodeRoomController extends Controller
 
     public function login(Request $request)
     {
-        // Logic untuk login
-        return redirect('/page1');
+        // ;
+        return redirect()->route('admin.addinterest');
     }
 }
