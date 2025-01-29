@@ -45,7 +45,7 @@
     <div class="container p-3">
         <div class="h1 text-uppercase text-center mb-5" style="font-size: 3em">Logo Game</div>
         <div class="row d-flex flex-column justify-content-center align-items-center gap-3 px-5">
-            <a href="/" class="menu-box col d-flex flex-row">
+            <a href="{{ route('login') }}" class="menu-box col d-flex flex-row">
                 <div class="box-1 text-center">
                     <i class="bi bi-gear"></i>
                 </div>
@@ -53,7 +53,7 @@
                     Admin
                 </div>
             </a>
-            <a href="/" class="menu-box col d-flex flex-row">
+            <a href="{{ route('player.create') }}" class="menu-box col d-flex flex-row">
                 <div class="box-1 text-center">
                     <i class="bi bi-person"></i>
                 </div>

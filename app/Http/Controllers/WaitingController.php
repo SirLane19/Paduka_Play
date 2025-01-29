@@ -8,7 +8,6 @@ class WaitingController extends Controller
 {
     public function show()
     {
-        // Anda dapat menambahkan logika di sini, seperti pengecekan status game
         return view('waiting');
     }
 }

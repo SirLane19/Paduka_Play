@@ -27,7 +27,7 @@ class LeaderboardController extends Controller
     public function endGame()
     {
         // Logika untuk mengakhiri permainan (reset leaderboard atau archive)
-        Leaderboard::truncate();
+        // Leaderboard::truncate();
         return redirect()->route('admin.leaderboard')->with('message', 'Game ended successfully!');
     }
 }

@@ -11,15 +11,35 @@ use App\Http\Controllers\UpgradeController;
 use App\Http\Controllers\StrategicHireTrainController;
 use App\Http\Controllers\LeaderboardController;
 
+// DEBUG ONLY
+Route::get('/ceksesi', function () {
+    return view('session_checker');
+});
+Route::get('check-session', function () {
+    $token = session('game_token');
+    $playerName = session('player_name');
+
+    // Mengembalikan data session ke frontend
+    return response()->json([
+        'game_token' => $token,
+        'player_name' => $playerName
+    ]);
+});
+
+Route::get('/admin/create-game', [CodeRoomController::class, 'createGameToken'])->name('admin.create');
+Route::post('/admin/start-session/{token}', [CodeRoomController::class, 'startGame'])->name('admin.store');
+Route::post('/player/add/{token}', [CodeRoomController::class, 'addPlayer'])->name('player.join');
+Route::post('/admin/end-session/{token}', [CodeRoomController::class, 'endGame'])->name('admin.endgame');
+Route::get('/session-status', [CodeRoomController::class, 'getGameStatus'])->name('all.getStatus');
+
 // Redirect default URL ke halaman home
-Route::get('/', function() {
+Route::get('/', function () {
     return redirect()->route('home');
 });
 
 // Login Page (Code Room)
 Route::controller(CodeRoomController::class)->group(function () {
     Route::get('/coderoom', 'index')->name('login');
-    Route::post('/login', 'login')->name('login.process');
 });
 
 // Home Page
@@ -45,7 +65,7 @@ Route::prefix('player')->name('player.')->group(function () {
     Route::get('/create', [PlayerController::class, 'create'])->name('create');
     Route::post('/store', [PlayerController::class, 'store'])->name('store');
     Route::get('/success', [PlayerController::class, 'success'])->name('success');
-    });
+});
 
 Route::get('/marketing/input', [MarketingController::class, 'create'])->name('marketing.input');
 Route::post('/marketing/store', [MarketingController::class, 'store'])->name('marketing.store');
